@@ -11,5 +11,5 @@ tar -xzf v1.5.4-hotfix.2.tar.gz
 cd flutter-1.5.4-hotfix.2
 export PATH="$PATH:`pwd`/bin"
 
-cd CLONE_DIR
+cd $CLONE_DIR
 flutter build ios --no-codesign --release -v
