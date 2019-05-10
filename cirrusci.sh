@@ -11,7 +11,7 @@ git clone -b stable https://github.com/flutter/flutter.git
 cd flutter
 export PATH="$PATH:`pwd`/bin"
 
-cd $CLONE_DIR
+cd $CLONE_DIR/mobile
 flutter --version
 flutter packages pub get
 flutter build ios --no-codesign --release -v
