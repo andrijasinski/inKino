@@ -14,4 +14,4 @@ export PATH="$PATH:`pwd`/bin"
 cd $CLONE_DIR/mobile
 flutter --version
 flutter packages pub get
-flutter build apk --no-codesign --release 
+flutter build apk --release 
