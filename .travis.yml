@@ -1,9 +1,5 @@
 os: linux
 language: android
-licenses:
-  - 'android-sdk-preview-license-.+'
-  - 'android-sdk-license-.+'
-  - 'google-gdk-license-.+'
 android:
   components:
     - tools
@@ -25,7 +21,8 @@ addons:
       - libstdc++6
       - fonts-droid
 before_script:
-  - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+  - yes | sdkmanager --licenses
+  - yes | sdkmanager --update 
   - wget http://services.gradle.org/distributions/gradle-4.10.2-bin.zip
   - unzip -qq gradle-4.10.2-bin.zip
   - export GRADLE_HOME=$PWD/gradle-4.10.2
