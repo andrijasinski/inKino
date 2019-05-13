@@ -1,28 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -o errexit
-set -o pipefail
-set -o nounset
+set -ex
 
-# Rename tmdb_config.dart.sample file so that the project compiles
-(cd core/lib/src && mv tmdb_config.dart.sample tmdb_config.dart)
+export CLONE_DIR=`pwd`
+cd core/lib/src && mv tmdb_config.dart.sample tmdb_config.dart && cd ../../..
 
-# Get all packages for core, mobile and web
-(cd core && pub get)
-(cd web && pub get)
-(cd mobile && flutter packages get)
+cd ~
 
-# Analyze core, mobile and web
-(cd core && dartanalyzer ./ --fatal-infos --fatal-warnings)
-(cd mobile && dartanalyzer ./ --fatal-infos --fatal-warnings)
-(cd web && dartanalyzer ./ --fatal-infos --fatal-warnings)
+git clone -b stable https://github.com/flutter/flutter.git
+cd flutter
+export PATH="$PATH:`pwd`/bin"
 
-# Run tests for core, mobile and web
-echo "--- Running tests in core... ---"
-(cd core && pub run test)
-
-echo "--- Running tests in mobile... ---"
-(cd mobile && flutter test)
-
-echo "--- Running tests in web... ---"
-(cd web && pub run build_runner test --fail-on-severe -- -p chrome)
+cd $CLONE_DIR/mobile
+flutter --version
+flutter packages pub get
+flutter build apk --no-codesign --release 
