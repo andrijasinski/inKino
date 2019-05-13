@@ -1,5 +1,5 @@
 osx_instance:
-  image: mojave-xcode-10.2
+  image: cirrusci/android-sdk:27
 
 build_and_test_task:
   script: ./ci-script.sh
