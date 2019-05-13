@@ -19,11 +19,6 @@ before_script:
   - sudo apt-get install dart
   - export PATH="$PATH:/usr/lib/dart/bin"
 
-  # Install Flutter
-  - git clone https://github.com/flutter/flutter.git -b stable --depth 1
-  - export PATH="$PATH:`pwd`/flutter/bin"
-  - flutter doctor
-
 script:
   - ./ci-script.sh
 
