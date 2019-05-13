@@ -1,32 +1,34 @@
+os: linux
 language: android
-jdk: oraclejdk8
+licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - tools
-    # - platform-tools
-
-    # The BuildTools version used by your project
-    - build-tools-26.0.2
-
-    # The SDK version used to compile your project
-    - android-26
-  licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - tools
+    - platform-tools
+    - build-tools-25.0.3
+    - android-25
+    - sys-img-armeabi-v7a-google_apis-25
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-google-android-support
+jdk: oraclejdk8
+sudo: false
 addons:
   apt:
+    # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
     sources:
-      - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
     packages:
       - libstdc++6
       - fonts-droid
-
 before_script:
-  - cd ~/Library/Android/sdk/tools/bin
-  - echo yes | ./sdkmanager --licenses
+  - wget http://services.gradle.org/distributions/gradle-5.3.1-bin.zip
+  - unzip -qq gradle-5.3.1-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-5.3.1
+  - export PATH=$GRADLE_HOME/bin:$PATH
 
 script:
   - ./ci-script.sh
